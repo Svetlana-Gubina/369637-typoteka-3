@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Svetlana-Gubina/369637-typoteka-3#readme",
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-htmlacademy": "0.6.0"
+    "eslint-config-htmlacademy": "0.6.0",
+    "random-date-generator": "1.0.2"
   }
 }
