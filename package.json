@@ -5,6 +5,7 @@
   "main": "./src/service/service.js",
   "scripts": {
     "start": "node ./src/service/service.js",
+    "start.dev": "nodemon ./src/main.js",
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/"
   },
@@ -21,6 +22,10 @@
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-htmlacademy": "0.6.0",
+    "nodemon": "2.0.13",
     "random-date-generator": "1.0.2"
+  },
+  "dependencies": {
+    "chalk": "4.1.2"
   }
 }
