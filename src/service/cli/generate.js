@@ -15,26 +15,25 @@ const OVERFLOW_MESSAGE = `Не больше ${MAX_ELEMENTS} публикаций
 
 const TITLES_PATH = `./data/titles.txt`;
 const CATEGORIES_PATH = `./data/categories.txt`;
-const SENTENCES_PATH = `./data/sentences.txt`;
+const ANNOUNCE_PATH = `./data/announce.txt`;
 
 const readFile = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
-    return content.trim().split(`\n`);
+    return content.split(`\n`).filter((contentItem) => contentItem.trim() !== ``);
   } catch (err) {
     console.error(chalk.red(err));
     return [];
   }
 };
 
-const createMockData = (count, titles, categories, sentences) => {
-
+const createMockData = (count, [titles, categories, announce]) => {
   const result = [];
   for (let i = 0; i < count; i++) {
     result.push({
       title: titles[getRandomInteger(0, titles.length - 1)],
-      announce: shuffle(sentences).slice(0, getRandomInteger(1, 5)).join(` `),
-      fullText: shuffle(sentences).slice(0, getRandomInteger(1, sentences.length - 1)).join(` `),
+      announce: shuffle(announce).slice(0, getRandomInteger(1, 5)).join(` `),
+      fullText: shuffle(announce).slice(0, getRandomInteger(1, announce.length - 1)).join(` `),
       createdDate: getRandomDate(),
       сategory: shuffle(categories).slice(0, getRandomInteger(1, categories.length - 1)),
     });
@@ -49,18 +48,15 @@ module.exports = {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
-    const titles = await readFile(TITLES_PATH);
-    const categories = await readFile(CATEGORIES_PATH);
-    const sentences = await readFile(SENTENCES_PATH);
-
+    const options = await Promise.all([readFile(TITLES_PATH), readFile(CATEGORIES_PATH), readFile(ANNOUNCE_PATH)]);
 
     if (countOffer > MAX_ELEMENTS) {
       console.info(OVERFLOW_MESSAGE);
       process.exit(ExitCode.error);
     }
 
-    const data = JSON.stringify(createMockData(countOffer, titles, categories, sentences));
     try {
+      const data = JSON.stringify(createMockData(countOffer, options));
       await fs.writeFile(FILE_NAME, data);
       console.info(chalk.green(`Operation success. File created.`));
     } catch (err) {
