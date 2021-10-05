@@ -27,7 +27,7 @@ const readFile = async (filePath) => {
   }
 };
 
-const createMockData = (count, [titles, categories, announce]) => {
+const createMockData = (count, {titles, categories, announce}) => {
   const result = [];
   for (let i = 0; i < count; i++) {
     result.push({
@@ -48,7 +48,8 @@ module.exports = {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
-    const options = await Promise.all([readFile(TITLES_PATH), readFile(CATEGORIES_PATH), readFile(ANNOUNCE_PATH)]);
+    const [titles, categories, announce] = await Promise.all([readFile(TITLES_PATH), readFile(CATEGORIES_PATH), readFile(ANNOUNCE_PATH)]);
+    const options = {titles, categories, announce};
 
     if (countOffer > MAX_ELEMENTS) {
       console.info(OVERFLOW_MESSAGE);
