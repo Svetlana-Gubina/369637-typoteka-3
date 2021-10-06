@@ -49,7 +49,6 @@ module.exports = {
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
     const [titles, categories, announce] = await Promise.all([readFile(TITLES_PATH), readFile(CATEGORIES_PATH), readFile(ANNOUNCE_PATH)]);
-    const options = {titles, categories, announce};
 
     if (countOffer > MAX_ELEMENTS) {
       console.info(OVERFLOW_MESSAGE);
@@ -57,7 +56,7 @@ module.exports = {
     }
 
     try {
-      const data = JSON.stringify(createMockData(countOffer, options));
+      const data = JSON.stringify(createMockData(countOffer, {titles, categories, announce}));
       await fs.writeFile(FILE_NAME, data);
       console.info(chalk.green(`Operation success. File created.`));
     } catch (err) {

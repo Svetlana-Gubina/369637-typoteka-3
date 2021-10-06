@@ -37,8 +37,8 @@ module.exports = {
         case `/`:
           const content = await fs.readFile(mockFile);
           const items = JSON.parse(content);
-          const message = items.map((item) => `<li>${item}</li>`.join(``));
-          getResponse(res, HttpCode.OK, `<ul><li>Заголовок публикации</li>${message}</ul>`);
+          const message = items.map((item) => `<li>${item.title}</li>`).join(``);
+          getResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
           break;
         default:
           getResponse(res, HttpCode.NOT_FOUND, notFoundMessage);
