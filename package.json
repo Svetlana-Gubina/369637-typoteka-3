@@ -5,6 +5,7 @@
   "main": "./src/service/service.js",
   "scripts": {
     "start": "nodemon ./src/service/service.js --server",
+    "start-front-server": "nodemon ./src/express/express.js",
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/"
   },
@@ -22,9 +23,13 @@
     "eslint": "7.32.0",
     "eslint-config-htmlacademy": "0.6.0",
     "nodemon": "2.0.13",
+    "pug-lint": "2.6.0",
     "random-date-generator": "1.0.2"
   },
   "dependencies": {
-    "chalk": "4.1.2"
+    "axios": "0.23.0",
+    "chalk": "4.1.2",
+    "express": "4.17.1",
+    "pug": "3.0.2"
   }
 }
