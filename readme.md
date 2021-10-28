@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
-* Студент: [Светлана Терентьева](https://up.htmlacademy.ru/nodejs/3/user/369637).
-* Наставник: `Неизвестно`.
+- Студент: [Светлана Терентьева](https://up.htmlacademy.ru/nodejs/3/user/369637).
+- Наставник: [Юрий Кучма](https://htmlacademy.ru/profile/krabaton).
 
 ---
 
